@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Most Dangerous Game</title>
+    <meta charset="utf-8">
+
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/octicons.css">
+
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Yanone Kaffeesatz'; }
+      h1, h2, h3 {
+        font-weight: normal;
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      h4{
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: light;
+      }
+      img { border-radius: 20px; }
+      ul {
+        list-style-type: circle;
+        font-size: 1.75em;
+      }
+      i {
+        color: #E0051C;
+      }
+      strong {
+        font-weight: bolder;
+      }
+      a {
+        color: #E0051C;
+      }
+      .img-alt { border-radius: 0px; }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      /* Reverse slide layout */
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .black {
+        background: #000;
+      }
+      .inverse h1, .inverse h2, .inverse h3 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 25%;
+        height: 92%;
+        float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+        color: #000;
+      }
+      .right-column {
+        width: 70%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: class: middle, center, black
+![](img/dangerous_game.png)
+
+???
+
+Give a brief introduction.
+
+---
+
+class: center, middle
+layout: true
+
+---
+
+# @sroberts
+# ![](img/sroberts.jpg)
+# DFIR Engineer __@__ GitHub
+
+---
+
+# Originally Written & Presented with __@__[kylemaxwell](https://twitter.com/kylemaxwell) At [SANS CTI Summit](https://www.sans.org/event/cyber-threat-intelligence-summit-2015)
+
+---
+
+class: middle, right, inverse
+
+# Intelligence Concepts
+## _That Everyone Knows And Already Agrees on Right...?_
+
+---
+
+class: middle
+layout: false
+
+# Data vs Intelligence
+- __Data__ is a raw piece of information without context
+- __Intelligence__ has gone through the Intelligence Cycle
+
+---
+
+class: middle
+# [The Intelligence Cycle](http://sroberts.github.io/2015/02/16/cycles-intelligence/)
+- Requirements
+- Collection
+- Processing
+- Analysis
+- Dissemination
+- Feedback
+
+---
+
+class: middle
+# [F3EAD](http://sroberts.github.io/2015/03/24/f3ead/)
+- Find
+- Fix
+- Finish
+- Exploit
+- Analyze
+- Disseminate
+
+---
+background-image: url(img/hunting.jpg)
+
+class: center, middle, inverse
+# Hunting __(IR)__ vs Hunting __(TI)__
+
+???
+
+- IR: Proactively looking for adversaries in an environment
+- TI: Gathering information about adversaries
+
+---
+
+class: middle, right, inverse
+# The Target
+
+---
+
+class: middle, center
+# What is Targeting?
+## _Making a plan for focusing threat research & investigation_
+
+---
+
+class: middle
+# Targeting Methodologies
+- Actor Centric
+- Target Centric
+- Technology Centric
+
+???
+Technology Centric: Rare, unless you're defending something really unique like ICS.
+
+---
+
+class: middle, center
+# Feeds
+## Needles in Haystacks
+
+???
+
+- What business typically thinks of when they think of Threat Intelligence
+
+---
+
+class: middle
+## <i class="fa fa-quote-left"></i> My 5.4 gazillion indicators can beat up your threat indicators. Garbage in garbage out #ThreatIntel
+
+### ~ @[rickhholland](https://twitter.com/rickhholland)
+
+---
+
+class: center, middle
+
+# Honeypots
+## Bringing the Bad Guys to You
+
+---
+
+class: center, middle
+# Old School: [Honeynet Project](https://www.honeynet.org/)
+
+# New Hotness: [Modern Honey Network](https://threatstream.github.io/mhn/)
+
+???
+
+- Modern Honeynet was created by ThreatStream
+
+---
+
+class: center, middle
+# Vuln Info
+## Taking Care of your own Toys
+
+---
+
+class: middle
+## <i class="fa fa-quote-left"></i> Structured vulnerability analysis is not threat intelligence it is requirements gathering for threat intelligence.
+
+### ~ @[selil](https://twitter.com/selil)
+
+---
+
+class: center, middle
+# Vendor Info
+## Services & APIs
+
+---
+
+class: center, middle
+# Review Your Own Incidents
+## Mine that fancy incident management system...
+
+---
+
+class: center, middle
+# Review Your Others Incidents
+## By Sharing or News Mining
+
+---
+
+class: middle, right, inverse
+layout: false
+
+# The Hunt
+
+---
+class: middle
+layout: true
+---
+
+class: center
+
+## What to Analyze
+### Technical Sources
+
+---
+
+class: middle
+# What to Analyze: Malware
+
+## Malware Sources
+- VXShare
+- VirusTotal
+- Malwr.com
+
+## Reversing
+- C2 Info
+- Destinctive Strings
+- Developer Artifacts
+
+---
+
+class: middle
+
+# What to Analyze: Passive DNS
+- The most useful tool for infrastructure research
+- What resolved to what, and when?
+- DNSDB (Farsight), PassiveTotal, & VirusTotal
+
+---
+
+# What to Analyze: Whois
+- Tougher to Acquire
+- WhoDat for Ongoing Tracking
+
+---
+
+class: middle
+# What to Analyze: Actors
+
+---
+
+class: middle
+# What to Analyze: Criminal Actors
+- Primary Weapon: Google
+- Social Networks (Twitter, Facebook)
+- Underground Forums
+
+???
+
+Remember country specific social networks.
+
+---
+
+class: middle
+# What to Analyze: Espionage Actors
+- Malware & system artifacts
+- Whois/Registrar Data
+- Actions Over Target
+
+???
+
+This is hard
+
+---
+
+class: middle
+# How to Keep Tracking
+
+---
+
+class: middle
+# Threat Library
+- [CRITs](https://crits.github.io/) is popular, [MISP](http://www.misp-project.org/) also
+- Lighter solutions (like wikis) often work
+- Market hasn't fully addressed this
+
+---
+
+# Web Monitoring Systems
+- [Netflix Scumblr](https://github.com/Netflix/Scumblr) Meta Search (Works alongside Sketchy)
+- [Recorded Future](https://www.recordedfuture.com/)
+- Lots of custom development
+
+---
+
+# Malware Monitoring
+- [VirusTotal](https://www.virustotal.com/) is King
+- Malware feeds with lots of custom internal solutions
+- [Maltrieve](https://github.com/krmaxwell/maltrieve), [Viper](https://github.com/viper-framework/viper), & [Cuckoo](http://www.cuckoosandbox.org/)
+
+---
+
+# Internal Logging
+- Firewall, IDS, & Proxy
+- Web, mail, & DNS
+- Authentication & Audit
+
+---
+
+class: middle, right, inverse
+layout: false
+# The "Kill"
+
+???
+
+- Actually executing against the adversary
+
+---
+
+class: middle, center
+layout: true
+
+---
+
+# Incident Response
+## The Entire Goal... Right?
+
+???
+- Mitigation
+- Remediation
+- Recovery
+
+---
+
+# KICK ‘EM OUT NOW!
+## Sometimes it’s better to watch for a while...
+
+???
+Enigma Example
+
+---
+
+# The Imitation Game
+![](img/imitation.jpg)
+## Don’t let them know that you know that they know…
+
+???
+
+---
+
+# Attribution
+![](img/cruise.jpg)
+## Doesn’t matter unless you have cruise missiles... <br> _Or handcuffs..._
+
+---
+
+layout: false
+class: middle
+
+# Intel Driven Responses
+- Deny
+- Decieve
+- Degrade
+- Disrupt
+- Destroy
+
+---
+
+class: middle, center
+# Communication
+## _Who can make use of this information?_
+## _Who might be able to provide additional intel?_
+
+???
+
+Has to be done carefully.
+
+---
+
+class: middle, right, inverse
+# The Hunting Stories
+
+---
+
+class: middle
+layout: true
+
+---
+
+# Products
+- IOCs & RFIs
+- Short Form Products
+- Long Form Products
+
+---
+class: center
+
+# Audience
+## __Internal:__ Team & Organization
+## __External:__ Peers & Wide
+
+---
+
+class: center
+# IOCs - Generalized
+
+# ![](img/samesame.gif)
+
+## The Current Standards: [STIX](https://stixproject.github.io/) & [OpenIOC](http://openioc.org/)
+
+???
+
+- Yeah... doesn't help much
+
+---
+
+class: middle
+## <i class="fa fa-quote-left"></i> You pretty much need a PHD in XML to understand either STIX or TAXII.
+
+### ~ Jeff Bryner
+
+???
+
+---
+class: top, center
+layout: false
+
+# The Problem with Standards
+# .img-alt[![](img/standards.png)]
+
+---
+
+class: middle, center
+layout: true
+
+---
+
+# IOCs - Specialized
+
+## Snort: _Go to for network activity, Comprehensive and well supported_
+## Yara: _Malware centric av signature style IOCs, getting more advanced_
+
+---
+
+## Requests For Intelligence
+### Shortest form possible with fastest turn around
+
+## Short Form Products
+### Intermediate products to support incident response
+
+## Long Form Products
+### Comprehensive “All Source” intelligence products
+
+???
+
+- RFI should be answering one specific question
+- Short Forms: INdicator heavy
+- Long Forms: Require a mature team
+
+---
+
+class: middle, right, inverse
+# The Joke
+
+???
+
+Tell the Story of YoloThre.at
+
+---
+
+# [YoloThre.at](http://yolothre.at/)
+## A collection of open source docker containers for Threat Intel
+
+---
+
+class: middle, right, inverse
+# Review
+
+---
+
+layout: false
+class: left, middle
+# Review
+- The Target
+- The Hunt
+- The “Kill”
+- The Hunting Stories
+
+---
+
+class: middle, center, inverse
+# ![](img/hail-octdra.png)
+# GitHub Security is Growing...
+
+---
+
+class: middle, right, inverse
+# Questions??
+
+---
+
+background-image: url(img/shai.gif)
+class: bottom, center
+# Thanks!!!
+
+
+    </textarea>
+    <!-- <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"> -->
+    <script src="js/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
