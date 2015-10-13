@@ -15,8 +15,7 @@
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
       body { font-family: 'Yanone Kaffeesatz'; }
-      h1, h2, h3 {
-        font-weight: normal;
+      h1, h2 {
         font-weight: 400;
         margin-bottom: 0;
       }
@@ -56,7 +55,7 @@
       /* Two-column layout */
       .left-column {
         color: #777;
-        width: 25%;
+        width: 20%;
         height: 92%;
         float: left;
       }
@@ -64,7 +63,7 @@
         color: #000;
       }
       .right-column {
-        width: 70%;
+        width: 75%;
         float: right;
         padding-top: 1em;
       }
@@ -251,57 +250,87 @@ class: center
 
 ---
 
-class: middle
-# What to Analyze: Malware
+# Technical Sources
 
-## Malware Sources
+.left-column[
+### Malware
+]
+.right-column[
+### Malware Sources
 - VXShare
 - VirusTotal
 - Malwr.com
 
-## Reversing
+### Reversing Goals
 - C2 Info
 - Destinctive Strings
 - Developer Artifacts
+- Capabilities
+]
 
 ---
 
-class: middle
+# Technical Sources
 
-# What to Analyze: Passive DNS
+.left-column[
+### Malware
+### Passive DNS
+]
+.right-column[
 - The most useful tool for infrastructure research
 - What resolved to what, and when?
 - DNSDB (Farsight), PassiveTotal, & VirusTotal
+]
 
 ---
 
-# What to Analyze: Whois
+# Technical Sources
+
+.left-column[
+### Malware
+### Passive DNS
+### Whois
+]
+.right-column[
 - Tougher to Acquire
 - WhoDat for Ongoing Tracking
+]
+
+---
+
+# Technical Sources
+
+.left-column[
+### Malware
+### Passive DNS
+### Whois
+### Certificates
+]
+.right-column[
+## Certs are hard to change
+![](img/ssl.png)
+]
 
 ---
 
 class: middle
-# What to Analyze: Actors
-
----
-
-class: middle
-# What to Analyze: Criminal Actors
+# What to Analyze: Actors | Criminal
 - Primary Weapon: Google
 - Social Networks (Twitter, Facebook)
 - Underground Forums
+- Demands & Correspondence
 
 ???
 
-Remember country specific social networks.
+- Remember country specific social networks.
 
 ---
 
 class: middle
-# What to Analyze: Espionage Actors
-- Malware & system artifacts
+# What to Analyze: Actors | Espionage
+- Malware & System Artifacts
 - Whois/Registrar Data
+- Tactics, Techniques, & Proceedures
 - Actions Over Target
 
 ???
@@ -334,6 +363,7 @@ class: middle
 - [VirusTotal](https://www.virustotal.com/) is King
 - Malware feeds with lots of custom internal solutions
 - [Maltrieve](https://github.com/krmaxwell/maltrieve), [Viper](https://github.com/viper-framework/viper), & [Cuckoo](http://www.cuckoosandbox.org/)
+- [Yara](https://plusvic.github.io/yara/) (We'll get to that...)
 
 ---
 
@@ -404,7 +434,7 @@ class: middle
 ---
 
 class: middle, center
-# Communication
+# <i class="fa fa-envelope"></i> Communication
 ## _Who can make use of this information?_
 ## _Who might be able to provide additional intel?_
 
@@ -419,80 +449,203 @@ class: middle, right, inverse
 
 ---
 
-class: middle
-layout: true
+class: center, middle
+
+# Intelligence Products
+# IOCs <i class="fa fa-arrow-right"></i> RFIs <i class="fa fa-arrow-right"></i> Short Form <i class="fa fa-arrow-right"></i> Long Form
 
 ---
 
-# Products
-- IOCs & RFIs
-- Short Form Products
-- Long Form Products
+# Indicators of Compromise
+.left-column[
+## STIX
+]
+.right-column[
+### STIX is a language [...] for the specification, capture, characterization and communication of standardized cyber threat information.
+```xml
+<stix:Indicators>
+        <stix:Indicator xsi:type="indicator:IndicatorType" id="example:Indicator-33fe3b22-0201-47cf-85d0-97c02164528d" timestamp="2014-05-08T09:00:00.000000Z">
+            <indicator:Title>IP Address for known C2 channel</indicator:Title>
+            <indicator:Type xsi:type="stixVocabs:IndicatorTypeVocab-1.1">IP Watchlist</indicator:Type>
+            <indicator:Observable  id="example:Observable-1c798262-a4cd-434d-a958-884d6980c459">
+                <cybox:Object id="example:Object-1980ce43-8e03-490b-863a-ea404d12242e">
+                    <cybox:Properties xsi:type="AddressObject:AddressObjectType" category="ipv4-addr">
+                        <AddressObject:Address_Value condition="Equals">10.0.0.0</AddressObject:Address_Value>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="example:TTP-bc66360d-a7d1-4d8c-ad1a-ea3a13d62da9" />
+            </indicator:Indicated_TTP>
+        </stix:Indicator>
+...
+```
+]
 
 ---
-class: center
+
+# Indicators of Compromise
+.left-column[
+## STIX
+## OpenIOC
+]
+.right-column[
+### "OpenIOC was originally designed to enable MANDIANT’s products to codify intelligence in order to rapidly search for potential security breaches."
+```xml
+<short_description>DUQU (METHODOLOGY)</short_description>
+<description>
+Indicator for the duqu trojan. The initial duqu driver will decode and inject a dll (marked as .pnf) into a system process (usually services.exe). The injected dll contains another dll encoded within it's resource section which it will inject into other processes as identified within its encoded configuruation file (another .pnf file). This second injected dll is responsible for all backdoor/C2 communication.
+</description>
+<authored_by>MANDIANT</authored_by>
+<authored_date>2011-10-21T16:13:31</authored_date>
+<links>
+  <link rel="caveat">Methodology</link>
+</links>
+<definition>
+  <Indicator operator="OR" id="9fd46693-ee1c-4d31-b732-35bf952651e3">
+  <Indicator operator="AND" id="e4deb0af-7558-498e-b953-6e70ec694767">
+  <IndicatorItem id="d5b29cfe-8599-498a-b805-326273fe10c5" condition="contains">
+    <Context document="FileItem" search="FileItem/PEInfo/DigitalSignature/CertificateSubject" type="mir"/>
+    <Content type="string">C-Media Electronics Incorporation</Content>
+...
+```
+]
+
+---
+
+# Indicators of Compromise
+.left-column[
+## STIX
+## OpenIOC
+## Snort
+]
+.right-column[
+### Snort's signatures are the most common network activity representation
+```xml
+alert tcp $EXTERNAL_NET any -> $HOME_NET any
+(
+  msg:"SCAN XMAS";
+  flow:stateless;
+  flags:SRAFPU,12;
+  reference:arachnids,144;
+  classtype:attempted-recon;
+  sid:625;
+  rev:7;
+)
+```
+### Useful with other tools than just Snort
+]
+
+???
+
+- Snort sigs are also usable by many tools
+
+---
+
+# Indicators of Compromise
+.left-column[
+## STIX
+## OpenIOC
+## Snort
+## Yara
+]
+.right-column[
+### Malware centric AntiVirus signature style IOCs
+
+```json
+rule silent_banker : banker
+{
+    meta:
+        description = "This is just an example"
+        thread_level = 3
+        in_the_wild = true
+
+    strings:
+        $a = {6A 40 68 00 30 00 00 6A 14 8D 91}
+        $b = {8D 4D B0 2B C1 83 C0 27 99 6A 4E 59 F7 F9}
+        $c = "UVODFRYSIHLNWPEJXQZAKCBGMT"
+
+    condition:
+        $a or $b or $c
+}
+```
+### Useful locally, in various tools, even on VirusTotal
+]
+
+---
+
+# Intelligence Products
+
+.left-column[
+## RFIs
+]
+.right-column[
+## Purpose:
+- Short document answering one question
+- Fast response focused on IOCs
+
+## Audience:
+- CSuite <i class="fa fa-angle-double-right"></i> TI Team
+- TI Team <i class="fa fa-angle-double-right"></i> 3rd Party Intel Vendor
+- TI Team <i class="fa fa-angle-double-right"></i> Peer Intel Group
+]
+
+???
+- Shortest form possible with fastest turn around
+- Fast response
+
+---
+
+# Intelligence Products
+
+.left-column[
+## RFIs
+## Short Form
+]
+.right-column[
+## Purpose:
+- Intermediate support for incident response
+- Quick summary major aspects of attack & actors
+
+## Audience:
+- Incident Response Team
+- Internal Technical Teams
+]
+
+???
+
+- Short Forms: Indicator heavy
+
+---
+
+# Intelligence Products
+
+.left-column[
+## RFIs
+## Short Form
+## Long Form
+]
+.right-column[
+## Purpose:
+- “All Source” Intelligence Products
+- Detailing full actor lifecycles
+
+## Audience:
+- Executive Team
+- Public Relase (for PR)
+]
+
+???
+
+- Long Forms: Require a mature team
+
+---
+
+class: center, middle
 
 # Audience
-## __Internal:__ Team & Organization
-## __External:__ Peers & Wide
-
----
-
-class: center
-# IOCs - Generalized
-
-# ![](img/samesame.gif)
-
-## The Current Standards: [STIX](https://stixproject.github.io/) & [OpenIOC](http://openioc.org/)
-
-???
-
-- Yeah... doesn't help much
-
----
-
-class: middle
-## <i class="fa fa-quote-left"></i> You pretty much need a PHD in XML to understand either STIX or TAXII.
-
-### ~ Jeff Bryner
-
-???
-
----
-class: top, center
-layout: false
-
-# The Problem with Standards
-# .img-alt[![](img/standards.png)]
-
----
-
-class: middle, center
-layout: true
-
----
-
-# IOCs - Specialized
-
-## Snort: _Go to for network activity, Comprehensive and well supported_
-## Yara: _Malware centric av signature style IOCs, getting more advanced_
-
----
-
-## Requests For Intelligence
-### Shortest form possible with fastest turn around
-
-## Short Form Products
-### Intermediate products to support incident response
-
-## Long Form Products
-### Comprehensive “All Source” intelligence products
-
-???
-
-- RFI should be answering one specific question
-- Short Forms: INdicator heavy
-- Long Forms: Require a mature team
+## Internal: Team & Organization
+## External: Peers & Wide
 
 ---
 
@@ -505,6 +658,7 @@ Tell the Story of YoloThre.at
 
 ---
 
+class: center, middle
 # [YoloThre.at](http://yolothre.at/)
 ## A collection of open source docker containers for Threat Intel
 
@@ -522,6 +676,12 @@ class: left, middle
 - The Hunt
 - The “Kill”
 - The Hunting Stories
+
+---
+
+# If You Want to get into Threat Hunting
+- Learn the Players (Vendors & Attackers)
+- Learning Basic
 
 ---
 
