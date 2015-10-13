@@ -16,7 +16,6 @@
 
       body { font-family: 'Yanone Kaffeesatz'; }
       h1, h2, h3 {
-        font-weight: normal;
         font-weight: 400;
         margin-bottom: 0;
       }
@@ -56,7 +55,7 @@
       /* Two-column layout */
       .left-column {
         color: #777;
-        width: 25%;
+        width: 20%;
         height: 92%;
         float: left;
       }
@@ -64,7 +63,7 @@
         color: #000;
       }
       .right-column {
-        width: 70%;
+        width: 75%;
         float: right;
         padding-top: 1em;
       }
@@ -404,7 +403,7 @@ class: middle
 ---
 
 class: middle, center
-# Communication
+# <i class="fa fa-envelope"></i> Communication
 ## _Who can make use of this information?_
 ## _Who might be able to provide additional intel?_
 
@@ -419,80 +418,191 @@ class: middle, right, inverse
 
 ---
 
-class: middle
-layout: true
+class: center, middle
+
+# Intelligence Products
+# IOCs <i class="fa fa-arrow-right"></i> RFIs <i class="fa fa-arrow-right"></i> Short Form <i class="fa fa-arrow-right"></i> Long Form
 
 ---
 
-# Products
-- IOCs & RFIs
-- Short Form Products
-- Long Form Products
+# Indicators of Compromise
+.left-column[
+## STIX
+]
+.right-column[
+### STIX is a language [...] for the specification, capture, characterization and communication of standardized cyber threat information.
+```xml
+<stix:Indicators>
+        <stix:Indicator xsi:type="indicator:IndicatorType" id="example:Indicator-33fe3b22-0201-47cf-85d0-97c02164528d" timestamp="2014-05-08T09:00:00.000000Z">
+            <indicator:Title>IP Address for known C2 channel</indicator:Title>
+            <indicator:Type xsi:type="stixVocabs:IndicatorTypeVocab-1.1">IP Watchlist</indicator:Type>
+            <indicator:Observable  id="example:Observable-1c798262-a4cd-434d-a958-884d6980c459">
+                <cybox:Object id="example:Object-1980ce43-8e03-490b-863a-ea404d12242e">
+                    <cybox:Properties xsi:type="AddressObject:AddressObjectType" category="ipv4-addr">
+                        <AddressObject:Address_Value condition="Equals">10.0.0.0</AddressObject:Address_Value>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="example:TTP-bc66360d-a7d1-4d8c-ad1a-ea3a13d62da9" />
+            </indicator:Indicated_TTP>
+        </stix:Indicator>
+...
+```
+]
 
 ---
-class: center
+
+# Indicators of Compromise
+.left-column[
+## STIX
+## OpenIOC
+]
+.right-column[
+### "OpenIOC was originally designed to enable MANDIANT’s products to codify intelligence in order to rapidly search for potential security breaches."
+```xml
+<short_description>DUQU (METHODOLOGY)</short_description>
+<description>
+Indicator for the duqu trojan. The initial duqu driver will decode and inject a dll (marked as .pnf) into a system process (usually services.exe). The injected dll contains another dll encoded within it's resource section which it will inject into other processes as identified within its encoded configuruation file (another .pnf file). This second injected dll is responsible for all backdoor/C2 communication.
+</description>
+<authored_by>MANDIANT</authored_by>
+<authored_date>2011-10-21T16:13:31</authored_date>
+<links>
+  <link rel="caveat">Methodology</link>
+</links>
+<definition>
+  <Indicator operator="OR" id="9fd46693-ee1c-4d31-b732-35bf952651e3">
+  <Indicator operator="AND" id="e4deb0af-7558-498e-b953-6e70ec694767">
+  <IndicatorItem id="d5b29cfe-8599-498a-b805-326273fe10c5" condition="contains">
+    <Context document="FileItem" search="FileItem/PEInfo/DigitalSignature/CertificateSubject" type="mir"/>
+    <Content type="string">C-Media Electronics Incorporation</Content>
+...
+```
+]
+
+---
+
+# Indicators of Compromise
+.left-column[
+## STIX
+## OpenIOC
+## Snort
+]
+.right-column[
+### Snort one of the first major Network Intrusion Detection Systems.
+### Snort's signature format is the common network activity representation and is usable by many tools.
+```xml
+alert tcp $EXTERNAL_NET any -> $HOME_NET any
+(
+  msg:"SCAN XMAS";
+  flow:stateless;
+  flags:SRAFPU,12;
+  reference:arachnids,144;
+  classtype:attempted-recon;
+  sid:625;
+  rev:7;
+)
+```
+]
+
+---
+
+# Indicators of Compromise
+.left-column[
+## STIX
+## OpenIOC
+## Snort
+## Yara
+]
+.right-column[
+### "The pattern matching swiss knife for malware researchers (and everyone else)..."
+### Malware centric AntiVirus signature style IOCs
+
+```json
+rule silent_banker : banker
+{
+    meta:
+        description = "This is just an example"
+        thread_level = 3
+        in_the_wild = true
+
+    strings:
+        $a = {6A 40 68 00 30 00 00 6A 14 8D 91}
+        $b = {8D 4D B0 2B C1 83 C0 27 99 6A 4E 59 F7 F9}
+        $c = "UVODFRYSIHLNWPEJXQZAKCBGMT"
+
+    condition:
+        $a or $b or $c
+}
+```
+]
+
+---
+
+# Intelligence Products
+
+.left-column[
+## RFIs
+]
+.right-column[
+## Purpose:
+- Short product focused on answering one simple question
+
+## Audience:
+- Various
+]
+
+???
+# Shortest form possible with fastest turn around
+
+---
+
+# Intelligence Products
+
+.left-column[
+## RFIs
+## Short Form
+]
+.right-column[
+## Purpose:
+- Intermediate products to support incident response
+
+## Audience:
+- Incident Response Team
+]
+
+???
+
+- Short Forms: Indicator heavy
+
+---
+
+# Intelligence Products
+
+.left-column[
+## RFIs
+## Short Form
+## Long Form
+]
+.right-column[
+## Purpose:
+- Comprehensive “All Source” intelligence products
+
+## Audience:
+- Executive Team
+]
+
+???
+
+- Long Forms: Require a mature team
+
+---
+
+class: center, middle
 
 # Audience
-## __Internal:__ Team & Organization
-## __External:__ Peers & Wide
-
----
-
-class: center
-# IOCs - Generalized
-
-# ![](img/samesame.gif)
-
-## The Current Standards: [STIX](https://stixproject.github.io/) & [OpenIOC](http://openioc.org/)
-
-???
-
-- Yeah... doesn't help much
-
----
-
-class: middle
-## <i class="fa fa-quote-left"></i> You pretty much need a PHD in XML to understand either STIX or TAXII.
-
-### ~ Jeff Bryner
-
-???
-
----
-class: top, center
-layout: false
-
-# The Problem with Standards
-# .img-alt[![](img/standards.png)]
-
----
-
-class: middle, center
-layout: true
-
----
-
-# IOCs - Specialized
-
-## Snort: _Go to for network activity, Comprehensive and well supported_
-## Yara: _Malware centric av signature style IOCs, getting more advanced_
-
----
-
-## Requests For Intelligence
-### Shortest form possible with fastest turn around
-
-## Short Form Products
-### Intermediate products to support incident response
-
-## Long Form Products
-### Comprehensive “All Source” intelligence products
-
-???
-
-- RFI should be answering one specific question
-- Short Forms: INdicator heavy
-- Long Forms: Require a mature team
+## Internal: Team & Organization
+## External: Peers & Wide
 
 ---
 
@@ -505,6 +615,7 @@ Tell the Story of YoloThre.at
 
 ---
 
+class: center, middle
 # [YoloThre.at](http://yolothre.at/)
 ## A collection of open source docker containers for Threat Intel
 
