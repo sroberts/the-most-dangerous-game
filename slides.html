@@ -15,7 +15,7 @@
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
       body { font-family: 'Yanone Kaffeesatz'; }
-      h1, h2, h3 {
+      h1, h2 {
         font-weight: 400;
         margin-bottom: 0;
       }
@@ -250,57 +250,87 @@ class: center
 
 ---
 
-class: middle
-# What to Analyze: Malware
+# Technical Sources
 
-## Malware Sources
+.left-column[
+### Malware
+]
+.right-column[
+### Malware Sources
 - VXShare
 - VirusTotal
 - Malwr.com
 
-## Reversing
+### Reversing Goals
 - C2 Info
 - Destinctive Strings
 - Developer Artifacts
+- Capabilities
+]
 
 ---
 
-class: middle
+# Technical Sources
 
-# What to Analyze: Passive DNS
+.left-column[
+### Malware
+### Passive DNS
+]
+.right-column[
 - The most useful tool for infrastructure research
 - What resolved to what, and when?
 - DNSDB (Farsight), PassiveTotal, & VirusTotal
+]
 
 ---
 
-# What to Analyze: Whois
+# Technical Sources
+
+.left-column[
+### Malware
+### Passive DNS
+### Whois
+]
+.right-column[
 - Tougher to Acquire
 - WhoDat for Ongoing Tracking
+]
+
+---
+
+# Technical Sources
+
+.left-column[
+### Malware
+### Passive DNS
+### Whois
+### Certificates
+]
+.right-column[
+## Certs are hard to change
+![](img/ssl.png)
+]
 
 ---
 
 class: middle
-# What to Analyze: Actors
-
----
-
-class: middle
-# What to Analyze: Criminal Actors
+# What to Analyze: Actors | Criminal
 - Primary Weapon: Google
 - Social Networks (Twitter, Facebook)
 - Underground Forums
+- Demands & Correspondence
 
 ???
 
-Remember country specific social networks.
+- Remember country specific social networks.
 
 ---
 
 class: middle
-# What to Analyze: Espionage Actors
-- Malware & system artifacts
+# What to Analyze: Actors | Espionage
+- Malware & System Artifacts
 - Whois/Registrar Data
+- Tactics, Techniques, & Proceedures
 - Actions Over Target
 
 ???
@@ -333,6 +363,7 @@ class: middle
 - [VirusTotal](https://www.virustotal.com/) is King
 - Malware feeds with lots of custom internal solutions
 - [Maltrieve](https://github.com/krmaxwell/maltrieve), [Viper](https://github.com/viper-framework/viper), & [Cuckoo](http://www.cuckoosandbox.org/)
+- [Yara](https://plusvic.github.io/yara/) (We'll get to that...)
 
 ---
 
@@ -489,8 +520,7 @@ Indicator for the duqu trojan. The initial duqu driver will decode and inject a 
 ## Snort
 ]
 .right-column[
-### Snort one of the first major Network Intrusion Detection Systems.
-### Snort's signature format is the common network activity representation and is usable by many tools.
+### Snort's signatures are the most common network activity representation
 ```xml
 alert tcp $EXTERNAL_NET any -> $HOME_NET any
 (
@@ -503,7 +533,12 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET any
   rev:7;
 )
 ```
+### Useful with other tools than just Snort
 ]
+
+???
+
+- Snort sigs are also usable by many tools
 
 ---
 
@@ -515,7 +550,6 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET any
 ## Yara
 ]
 .right-column[
-### "The pattern matching swiss knife for malware researchers (and everyone else)..."
 ### Malware centric AntiVirus signature style IOCs
 
 ```json
@@ -535,6 +569,7 @@ rule silent_banker : banker
         $a or $b or $c
 }
 ```
+### Useful locally, in various tools, even on VirusTotal
 ]
 
 ---
@@ -546,14 +581,18 @@ rule silent_banker : banker
 ]
 .right-column[
 ## Purpose:
-- Short product focused on answering one simple question
+- Short document answering one question
+- Fast response focused on IOCs
 
 ## Audience:
-- Various
+- CSuite <i class="fa fa-angle-double-right"></i> TI Team
+- TI Team <i class="fa fa-angle-double-right"></i> 3rd Party Intel Vendor
+- TI Team <i class="fa fa-angle-double-right"></i> Peer Intel Group
 ]
 
 ???
-# Shortest form possible with fastest turn around
+- Shortest form possible with fastest turn around
+- Fast response
 
 ---
 
@@ -565,10 +604,12 @@ rule silent_banker : banker
 ]
 .right-column[
 ## Purpose:
-- Intermediate products to support incident response
+- Intermediate support for incident response
+- Quick summary major aspects of attack & actors
 
 ## Audience:
 - Incident Response Team
+- Internal Technical Teams
 ]
 
 ???
@@ -586,10 +627,12 @@ rule silent_banker : banker
 ]
 .right-column[
 ## Purpose:
-- Comprehensive “All Source” intelligence products
+- “All Source” Intelligence Products
+- Detailing full actor lifecycles
 
 ## Audience:
 - Executive Team
+- Public Relase (for PR)
 ]
 
 ???
@@ -633,6 +676,12 @@ class: left, middle
 - The Hunt
 - The “Kill”
 - The Hunting Stories
+
+---
+
+# If You Want to get into Threat Hunting
+- Learn the Players (Vendors & Attackers)
+- Learning Basic
 
 ---
 
