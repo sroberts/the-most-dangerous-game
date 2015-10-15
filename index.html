@@ -92,7 +92,48 @@ layout: true
 
 ---
 
+![](img/me-at-psu.jpg)
+
+## 2005
+
+---
+
+![](img/ohio.gif)
+
+---
+
 # Originally Written & Presented with __@__[kylemaxwell](https://twitter.com/kylemaxwell) At [SANS CTI Summit](https://www.sans.org/event/cyber-threat-intelligence-summit-2015)
+
+---
+
+class: center, middle
+# Cyber Threat Intelligence
+## ?? DEFINITION STILL NEEDED ??
+
+---
+background-image: url(img/hunting.jpg)
+
+class: center, middle, inverse
+# Hunting __(IR)__ vs Hunting __(TI)__
+
+???
+
+- IR: Proactively looking for adversaries in an environment
+- TI: Gathering information about adversaries
+
+---
+
+# What is "The Most Dangerous Game"??
+
+---
+
+![](img/novel.jpg)
+
+???
+
+- A novel by Richard Connell
+- Also called the Hounds of Zaroff
+- Released in 1924
 
 ---
 
@@ -131,17 +172,6 @@ class: middle
 - Exploit
 - Analyze
 - Disseminate
-
----
-background-image: url(img/hunting.jpg)
-
-class: center, middle, inverse
-# Hunting __(IR)__ vs Hunting __(TI)__
-
-???
-
-- IR: Proactively looking for adversaries in an environment
-- TI: Gathering information about adversaries
 
 ---
 
@@ -239,14 +269,47 @@ layout: false
 # The Hunt
 
 ---
+
 class: middle
 layout: true
+
 ---
 
 class: center
 
-## What to Analyze
-### Technical Sources
+# What to Analyze: _Actors_
+
+---
+
+class: middle
+# What to Analyze: Actors | Criminal
+- Primary Weapon: Google
+- Social Networks (Twitter, Facebook)
+- Underground Forums
+- Demands & Correspondence
+
+???
+
+- Remember country specific social networks.
+
+---
+
+class: middle
+# What to Analyze: Actors | Espionage
+- Malware & System Artifacts
+- Whois/Registrar Data
+- Tactics, Techniques, & Proceedures
+- Actions Over Target
+
+???
+
+This is hard
+
+---
+
+class: center
+
+# What to Analyze: _Technical Sources_
 
 ---
 
@@ -277,9 +340,14 @@ class: center
 ### Passive DNS
 ]
 .right-column[
-- The most useful tool for infrastructure research
+### What it is?
+- Continously identifies DNS record changes
 - What resolved to what, and when?
-- DNSDB (Farsight), PassiveTotal, & VirusTotal
+
+### Providers
+- DNSDB (Farsight)
+- PassiveTotal
+- VirusTotal
 ]
 
 ---
@@ -292,7 +360,11 @@ class: center
 ### Whois
 ]
 .right-column[
-- Tougher to Acquire
+### What it is?
+- The registrar information for DNS names & IPAddresses
+
+### Sources
+- DomainTools ($$$)
 - WhoDat for Ongoing Tracking
 ]
 
@@ -307,35 +379,12 @@ class: center
 ### Certificates
 ]
 .right-column[
-## Certs are hard to change
 ![](img/ssl.png)
 ]
 
----
-
-class: middle
-# What to Analyze: Actors | Criminal
-- Primary Weapon: Google
-- Social Networks (Twitter, Facebook)
-- Underground Forums
-- Demands & Correspondence
-
 ???
 
-- Remember country specific social networks.
-
----
-
-class: middle
-# What to Analyze: Actors | Espionage
-- Malware & System Artifacts
-- Whois/Registrar Data
-- Tactics, Techniques, & Proceedures
-- Actions Over Target
-
-???
-
-This is hard
+- Certificates are hard to change.
 
 ---
 
@@ -399,8 +448,8 @@ layout: true
 
 ---
 
-# KICK ‘EM OUT NOW!
-## Sometimes it’s better to watch for a while...
+![](http://www.moretricks.com/wp-content/uploads/2012/04/Spying-on-Someones-Mobile-Phone-Without-Physical-Access.png)
+# "KICK ‘EM OUT NOW!" or "Wait and see..."
 
 ???
 Enigma Example
@@ -433,6 +482,11 @@ class: middle
 
 ---
 
+class: middle, right, inverse
+# The Hunting Stories
+
+---
+
 class: middle, center
 # <i class="fa fa-envelope"></i> Communication
 ## _Who can make use of this information?_
@@ -441,11 +495,6 @@ class: middle, center
 ???
 
 Has to be done carefully.
-
----
-
-class: middle, right, inverse
-# The Hunting Stories
 
 ---
 
@@ -762,8 +811,16 @@ class: left, middle
 ---
 
 # If You Want to get into Threat Hunting
-- Learn the Players (Vendors & Attackers)
-- Learning Basic
+- Learn the players (Vendors & Attackers)
+- Learn ~~Basic~~ advanced development
+- Languages are really valuable
+- Get a secondary skill
+- Read everthing...
+
+???
+- Front End: HTML/CSS/Javascript
+- Scripting/Middleware: Python or Ruby
+- Backend: Go, Java, or CSS
 
 ---
 
