@@ -650,6 +650,86 @@ class: center, middle
 ---
 
 class: middle, right, inverse
+# The Use Case: Going Postal
+
+---
+
+class: center, middle
+![](img/postal_report.png)
+
+---
+
+# Step 1: Search for "My Targets"
+--
+
+## Found Nothing
+
+--
+
+- By this i mean look for GitHub or GitHub Related things
+
+---
+
+# Step 2: Extract IOCs
+
+--
+
+![](img/jager.png)
+
+---
+
+class: middle
+## 24 IPv4 addresses detected
+## 11 URLs detected
+## 1 email addresses detected
+## 6 Web files detected
+## 16 SHA256s detected
+
+???
+
+- The 11 URLs were mostly false positives
+
+---
+
+# Step 3: Secondary Sources
+- Google to the rescue!
+- Other vendor information (The "Me Too"s)
+- Mailing lists
+- Discuss with friends
+
+---
+
+# Step 3: Enrich IOCs
+
+--
+- Use PassiveTotal passive DNS to get more IPs & URLs
+- Gather current and historic whois data
+- Use VirusTotal to find malware or related malware
+
+???
+
+- Fuzzy hashes are your friend
+
+---
+
+# Step 4: Build & Deploy Detection
+
+--
+- Snort signatures for network activity
+- Yara rules for malware
+- Build blacklists
+
+---
+
+# Step 5: Read the Report
+
+--
+
+## _If we find something_
+
+---
+
+class: middle, right, inverse
 # The Joke
 
 ???
@@ -658,9 +738,11 @@ Tell the Story of YoloThre.at
 
 ---
 
-class: center, middle
+class: center
 # [YoloThre.at](http://yolothre.at/)
-## A collection of open source docker containers for Threat Intel
+## Open source docker containers for Threat Intel
+![](img/yolothreat.png)
+
 
 ---
 
