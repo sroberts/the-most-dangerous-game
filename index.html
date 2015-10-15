@@ -699,6 +699,88 @@ class: center, middle
 ---
 
 class: middle, right, inverse
+# The Use Case: Going Postal
+
+---
+
+class: center, middle
+![](img/postal_report.png)
+
+---
+
+# Step 1: Search for "My Targets"
+--
+
+## Found Nothing
+
+???
+
+- By this i mean look for GitHub or GitHub Related things
+
+---
+
+# Step 2: Extract IOCs
+
+--
+
+![](img/jager.png)
+
+---
+
+class: middle
+## 24 IPv4 addresses detected
+## 11 URLs detected
+## 1 email addresses detected
+## 6 Web files detected
+## 16 SHA256s detected
+
+???
+
+- The 11 URLs were mostly false positives
+
+---
+
+# Step 3: Secondary Sources
+- Google to the rescue!
+- Other vendor information (The "Me Too"s)
+- Threat APIs
+- Mailing lists
+- Discuss with friends & colleagues
+
+---
+
+# Step 3: Enrich IOCs
+
+--
+- Use PassiveTotal passive DNS to get more IPs & URLs
+- Gather current and historic whois data
+- Use VirusTotal to find malware or related malware
+
+???
+
+- Fuzzy hashes are your friend
+
+---
+
+# Step 4: Build & Deploy Detection
+
+--
+- Snort signatures for network activity
+- Yara rules for malware
+- Basic blacklists
+- Correlation rules & alerts
+
+---
+
+# Step 5: Read the Report
+
+--
+
+## _If we find something_
+
+---
+
+class: middle, right, inverse
 # The Joke
 
 ???
@@ -707,9 +789,11 @@ Tell the Story of YoloThre.at
 
 ---
 
-class: center, middle
+class: center
 # [YoloThre.at](http://yolothre.at/)
-## A collection of open source docker containers for Threat Intel
+## Open source docker containers for Threat Intel
+![](img/yolothreat.png)
+
 
 ---
 
@@ -725,15 +809,16 @@ class: left, middle
 - The Hunt
 - The “Kill”
 - The Hunting Stories
+- The Case Study
 
 ---
 
 # If You Want to get into Threat Hunting
 - Learn the players (Vendors & Attackers)
-- Learn ~~Basic~~ advanced development
-- Languages are really valuable
+- Learn ~~basic~~ advanced development
+- Language skills are really valuable
 - Get a secondary skill
-- Read everthing...
+- Read everthing on security, intel, international relations...
 
 ???
 - Front End: HTML/CSS/Javascript
@@ -745,6 +830,10 @@ class: left, middle
 class: middle, center, inverse
 # ![](img/hail-octdra.png)
 # GitHub Security is Growing...
+
+???
+
+We just started our internship program, look for us in 2016
 
 ---
 
